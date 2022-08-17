@@ -1,0 +1,579 @@
+    <div *ngIf="!showAssessment" class="w-full  flex justify-center relative">
+      <div class="bg-[#FCF4CA] border-l-[#FC9700] border-l-4 absolute top-0 w-full h-14 flex items-center gap-3 px-5">
+        <mat-icon class="w-5 h-4 " svgIcon="icons:warning-icon"></mat-icon>
+        <p class="text-[#8C5C1C] font-bold text-base mt-3">Noticia importante aquí</p>
+      </div>
+      <main  class="max-w-[120rem]">
+        <mat-card class="w-[60rem] mt-36 flex justify-center bg-white shadow-[0_5px_15px_2px_rgba(0,0,0,0.1)] py-10 rounded-2xl">
+          <div class="w-[34rem] flex flex-col">
+          <p class="font-sans text-primary text-4xl font-bold leading-none">Datos del Prospecto</p>
+        <form class="flex flex-col gap-4 mt-10">  
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Rut</mat-label>
+            <input matInput placeholder="Rut" value="" />
+          </mat-form-field>
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Teléfono</mat-label>
+            <input matInput placeholder="Teléfono" value=""  />
+          </mat-form-field>
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Correo electrónico</mat-label>
+            <input matInput placeholder="Correo electrónico" value="" />
+          </mat-form-field>
+
+          <button
+            mat-raised-button
+            type="submit"
+            (click)="clickContinue()"
+            class="btn-primary"
+          >
+          Continuar
+          </button>
+        </form>  
+          </div>
+        </mat-card>
+      </main>
+    </div>
+  <!-- vista evaluacion -->
+  <div  *ngIf="showAssessment" #evaluacion class="w-full flex-col flex items-center  bg-white relative pb-10">
+    <div class="bg-[#FCF4CA] border-l-[#FC9700] border-l-4 absolute top-0 w-full h-14 flex items-center gap-3 px-5">
+      <mat-icon class="w-5 h-4 " svgIcon="icons:warning-icon"></mat-icon>
+      <p class="text-[#8C5C1C] font-bold text-base mt-3">Noticia importante aquí</p>
+    </div>
+    <div class="shadow-lg w-full pt-14">
+      <div class="flex justify-center pt-6 pb-3 w-full">
+        <ul class="flex">
+          <li class="text-primary font-bold flex w-32 flex-col items-center">
+            <span [ngClass]="{'bg-slate-300 z-10': step==='assessment'||step==='scoring'||step==='scoring-card', ' bg-primary ': step==='information'||step==='data'||step==='signature'||step==='print'||step==='insurance'}"  class="w-4 h-4 border-2 border-primary   rounded-full"></span>
+            <span class="pt-2">Evualación</span>
+            <span>comercial</span>
+          </li>
+          <li [ngClass]="{'after:bg-primary': step==='information'||step==='data'||step==='signature'||step==='print'||step==='insurance','after:bg-slate-300':step==='scoring'||step==='scoring-card'||step==='assessment'}" class="font-medium flex w-32 flex-col items-center relative after:content-[''] after:w-full after:h-1  after:block left-0 after:top-[6px] after:absolute after:-translate-x-1/2">
+            <span  [ngClass]="{'bg-primary border-primary z-10':  step==='information'||step==='data'||step==='signature'||step==='print'||step==='insurance','bg-slate-300 border-white z-0':step==='scoring'||step==='scoring-card'||step==='assessment'}" class="w-4 h-4 rounded-full border-2"></span>
+            <span class="pt-2">Información de</span>
+            <span>la oferta</span>
+          </li>
+          <li [ngClass]="{ 'after:bg-primary': step==='data'||step==='signature'||step==='print'||step==='insurance','after:bg-slate-300':step==='scoring'||step==='scoring-card'||step==='assessment'||step==='information'}" class="font-medium flex w-32 flex-col items-center relative after:content-[''] after:w-full after:h-1 after:block left-0 after:top-[6px] after:absolute after:-translate-x-1/2">
+            <span  [ngClass]="{'bg-primary border-primary z-10':  step==='data'||step==='signature'||step==='print'||step==='insurance','bg-slate-300 border-white z-0':step==='scoring'||step==='scoring-card'||step==='assessment'||step==='information'}" class="w-4 h-4 rounded-full  border-2"></span>
+            <span class="pt-2">Datos del cliente</span>
+          </li>
+          <li  [ngClass]="{ 'after:bg-primary':  step==='signature'||step==='print'||step==='insurance','after:bg-slate-300':step==='scoring'||step==='scoring-card'||step==='assessment'||step==='information'||step==='data'}"  class="font-medium flex w-32 flex-col items-center relative after:content-[''] after:w-full after:h-1 after:bg-slate-300 after:block left-0 after:top-[6px] after:absolute after:-translate-x-1/2">
+            <span  [ngClass]="{'bg-primary border-primary z-10':  step==='signature'||step==='print'||step==='insurance','bg-slate-300 border-white z-0':step==='scoring'||step==='scoring-card'||step==='assessment'||step==='information'||step==='data'}" class="w-4 h-4 rounded-full  border-2"></span>
+            <span class="pt-2">Firma de</span>
+            <span>contratos</span>
+          </li>
+          <li [ngClass]="{ 'after:bg-primary':  step==='print'||step==='insurance','after:bg-slate-300':step==='scoring'||step==='scoring-card'||step==='assessment'||step==='information'||step==='data'||step==='signature'}" class="font-medium flex w-32 flex-col items-center relative after:content-[''] after:w-full after:h-1 after:bg-slate-300 after:block left-0 after:top-[6px] after:absolute after:-translate-x-1/2">
+            <span  [ngClass]="{'bg-primary border-primary z-10':  step==='print'||step==='insurance','bg-slate-300 border-white z-0':step==='scoring'||step==='scoring-card'||step==='assessment'||step==='information'||step==='data'||step==='signature'}" class="w-4 h-4 rounded-full  border-2"></span>
+            <span class="pt-2">Imprimir y</span>
+            <span>activar tarjeta</span>
+          </li>
+          <li [ngClass]="{ 'after:bg-primary':  step==='insurance','after:bg-slate-300':step==='scoring'||step==='scoring-card'||step==='assessment'||step==='information'||step==='data'||step==='signature'||step==='print'}" class="font-medium flex w-32 flex-col items-center relative after:content-[''] after:w-full after:h-1 after:bg-slate-300 after:block left-0 after:top-[6px] after:absolute after:-translate-x-1/2">
+            <span  [ngClass]="{'bg-primary border-primary z-10': step==='insurance','bg-slate-300 border-white z-0':step==='scoring'||step==='scoring-card'||step==='assessment'||step==='information'||step==='data'||step==='signature'||step==='print'}" class="w-4 h-4 rounded-full  border-2"></span>
+            <span class="pt-2">Seguros</span>        
+          </li>
+        </ul>     
+          <mat-icon *ngIf="show" (click)="clickShow()" class="w-6 h-6 cursor-pointer" svgIcon="icons:button-arrow-top-icon"></mat-icon>       
+          <mat-icon *ngIf="!show" (click)="clickShow()" class="w-6 h-6 cursor-pointer" svgIcon="icons:button-arrow-bottom-icon"></mat-icon> 
+      </div>
+      <div *ngIf="show" class="flex justify-center py-5">
+        <ul class="flex">
+          <li class="text-primary  font-bold flex w-32 flex-col items-center">
+            <span class="w-4 h-4 rounded-full bg-primary z-10"></span>
+            <span class="pt-2">Evualación</span>
+            <span>interna</span>
+          </li>
+          <li class="text-primary  font-bold flex w-32 flex-col items-center relative after:content-[''] after:w-full after:h-1 after:bg-primary after:block left-0 after:top-1.5 after:absolute after:-translate-x-1/2">
+            <span class="w-4 h-4 rounded-full bg-primary z-10"></span>
+            <span class="pt-2">Evaluación</span>
+            <span>scoring</span>
+          </li>
+          <li class="text-primary font-bold flex w-32 flex-col items-center relative after:content-[''] after:w-full after:h-1 after:bg-primary after:block left-0 after:top-1.5 after:absolute after:-translate-x-1/2">
+            <span class="w-4 h-4 rounded-full bg-primary z-10"></span>
+            <span class="pt-2">Evaluación de</span>
+            <span>cotizaciones</span>
+          </li>
+        </ul>
+      </div>
+    </div>    
+  <main  class="max-w-480 flex flex-col  ">
+    <div class="flex gap-5 mt-10">
+      <p class="font-bold text-primary text-xl">Cliente: Maria Bravo</p> 
+      <p class="font-bold text-primary text-xl">Rut: 12.12546-6</p>
+    </div>
+     <!-- evaluacion -->
+    <div *ngIf="step==='assessment'" class="flex justify-center gap-16 my-10 ">
+      <mat-card class="flex flex-col w-[22rem] bg-white shadow-[0_5px_15px_2px_rgba(0,0,0,0.1)] rounded-lg px-12 py-12 gap-3">
+        <p class="text-center font-bold text-xs">Validar código SMS/Whatsapp</p>
+        <p class="text-center font-bold text-primary text-base px-2">Ingresa el código que te enviamos a tu teléfono (SMS o Whatsapp)</p>
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Código</mat-label>
+          <input matInput placeholder="Código" value=""  />
+        </mat-form-field>
+        <button  mat-raised-button (click)="clickInformation(); scroll(evaluacion)"  class="btn-primary">Validar</button>
+      </mat-card>
+      <mat-card class="flex flex-col items-center w-[28rem] bg-white shadow-[0_5px_15px_2px_rgba(0,0,0,0.1)] rounded-lg px-6 py-12 gap-6">
+        <p class="text-center font-bold text-xs">Validación E-cert doble factor</p>
+        <div class="flex w-full justify-between ">
+          <div class="border-2 rounded-lg px-10 py-3 flex flex-col items-center gap-2">
+            <mat-icon class="w-20 h-20" svgIcon="icons:fingerprint-icon"></mat-icon>
+            <p class="font-bold">Huella digital</p>
+          </div>
+          <div class="border-2 rounded-lg px-10 py-3 flex flex-col items-center gap-2">
+            <mat-icon class="w-20 h-20" svgIcon="icons:license-icon"></mat-icon>
+            <p class="font-bold">Carnet de identidad</p>
+          </div>
+        </div>
+        
+        <button mat-raised-button class="btn-primary w-64 mt-2">Verificar identidad</button>
+      </mat-card>
+    </div>
+
+    <!-- scoring -->
+    <div *ngIf="step==='scoring'" class="flex justify-center gap-16 my-10">
+      <mat-card class="flex flex-col items-center w-[56rem] bg-white shadow-[0_5px_15px_2px_rgba(0,0,0,0.1)] rounded-2xl px-10 py-12 gap-8">
+        <mat-icon class="w-20 h-20" svgIcon="icons:card-icon"></mat-icon>
+        <div>
+          <p class="text-center text-secondary ">El cliente es funcionario Corona, debe solicitar la tarjeta con su Jac </p>
+          <p class="text-center  text-secondary text-sm ">haga click en “Ver Carta”</p>
+        </div>
+        <div class="flex justify-center gap-10">
+        <button mat-raised-button (click)="clickScoringCard()" class="btn-primary w-64">Ver carta</button>
+        <button mat-stroked-button (click)="clickAssessment()" class="btn-primary-outline border-2 border-primary w-64">Terminar y salir</button>
+      </div>
+      </mat-card>
+    </div>
+
+    <!-- scoring-card -->
+    <div *ngIf="step==='scoring-card'" class="flex justify-center gap-16 my-10">
+      <mat-card class="flex flex-col items-center w-240 bg-white shadow-[0_5px_15px_2px_rgba(0,0,0,0.1)] rounded-2xl px-10 py-12 gap-8">
+        <img class="w-192 h-80" src="../../../../../assets/imgs/info.png" alt="info"/>
+        <div class="flex justify-center gap-10 items-center">
+            <mat-icon class="w-6 h-6 cursor-pointer" svgIcon="icons:zoom-plus-icon"></mat-icon>
+            <mat-icon class="w-6 h-6 cursor-pointer" svgIcon="icons:zoom-minus-icon"></mat-icon>
+            <button mat-raised-button (click)="clickScoringCard()" class="btn-primary w-64 flex items-center justify-center gap-5 ">
+              <mat-icon class="w-5 h-4" svgIcon="icons:print-icon"></mat-icon>
+              Imprimir
+            </button>
+            <button mat-stroked-button class="btn-primary-outline border-2 border-primary w-64 flex items-center justify-center gap-5">
+              <mat-icon class="w-5 h-4 text-current" svgIcon="icons:mail-icon"></mat-icon>
+              Enviar por email
+            </button>
+        </div>
+      </mat-card>
+    </div>
+
+    <!-- information -->
+     <div *ngIf="step==='information'" class="flex justify-center gap-16 my-10">
+      <mat-card class="flex flex-col  w-240 bg-white shadow-[0_5px_15px_2px_rgba(0,0,0,0.1)] rounded-2xl px-24 py-12 gap-8">
+  
+        <div class="h-[72px] bg-[#EDEDED] rounded-lg flex gap-5 items-center px-5">
+          <mat-icon class="w-5 h-5" svgIcon="icons:info-icon"></mat-icon>
+          <p class="font-semibold mt-3.5">El cliente tiene aprobada una Tarjeta Corona Mastercard con un cupo de 500.000 Pesos.</p>
+        </div>
+        
+        <form>
+          <div class="">
+            <p class="font-bold text-xl">Productos alternativos a ofrecer</p>
+            <p class="font-bold">(Solo en caso de que no acepte la oferta inicial)</p>
+          </div>
+          <mat-form-field appearance="fill" class="w-full">
+            <mat-label>Producto</mat-label>
+            <mat-select value="">
+              <mat-option value="BXXXX1">BXXXX1</mat-option>
+              <mat-option value="BXXXX2">BXXXX2</mat-option>
+              <mat-option value="BXXXX3">BXXXX3</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <p class="font-bold text-xl mt-3">¿El cliente acepta el producto?</p>
+          
+            <mat-radio-group aria-label="Select an option" class="flex gap-5">
+              <mat-radio-button value="1" class="py-5">Option 1</mat-radio-button>
+              <mat-radio-button value="2" class="py-5">Option 2</mat-radio-button>
+            </mat-radio-group>
+          
+
+          <p class="font-bold text-xl mt-3">¿Por qué no quiere la tarjeta Corona?</p>
+          <mat-form-field appearance="fill" class="w-full">
+            <mat-label>Motivo</mat-label>
+            <mat-select value="">
+              <mat-option value="1">
+                Otro
+              </mat-option>
+              <mat-option value="2">
+                Otro
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Especifique otro</mat-label>
+            <input matInput placeholder="Especifique otro" value="" />
+          </mat-form-field>
+      </form>
+        <div class="flex justify-center gap-10 items-center">
+            <button mat-stroked-button (click)="clickAssessment()"   class="btn-primary-outline w-64 border-2 border-primary ">
+              Salir (No)
+            </button>
+            <button mat-raised-button (click)="clickData(); scroll(evaluacion)" class="w-64 btn-primary ">
+              Siguiente (Si)
+            </button>
+        </div>
+      </mat-card>
+    </div>
+
+     <!-- data -->
+     <div *ngIf="step==='data'" class="flex justify-center gap-16 my-10">
+      <mat-card  class="flex flex-col  w-240 bg-white shadow-[0_5px_15px_2px_rgba(0,0,0,0.1)] rounded-2xl px-24 py-12 gap-8">
+        
+        <form>
+          <div class="flex w-full gap-5 py-1">
+            <mat-form-field  class="example-full-width" appearance="fill" disabled>
+              <mat-label>RUT</mat-label>
+              <input matInput placeholder="RUT" value="12.32145-8" disabled='true' />
+            </mat-form-field>
+            <mat-form-field class="example-full-width" appearance="fill">
+              <mat-label>Nombres</mat-label>
+              <input matInput placeholder="Nombres" value="Juan Carlos" disabled='true' />
+            </mat-form-field>
+          </div>
+
+          <div class="flex w-full gap-5 py-1">
+            <mat-form-field class="example-full-width" appearance="fill">
+              <mat-label>Apellidos</mat-label>
+              <input matInput placeholder="Apellidos" value="Perez Ruiz"  disabled='true'/>
+            </mat-form-field>
+            <mat-form-field class="example-full-width" appearance="fill">
+              <mat-label>Teléfono</mat-label>
+              <input matInput placeholder="Teléfono" value="905062032" disabled='true' />
+            </mat-form-field>
+          </div>
+
+          <div class="flex w-full gap-5 py-1">
+            <mat-form-field class="example-full-width" appearance="fill">
+              <mat-label>Teléfono adicional</mat-label>
+              <input matInput placeholder="Teléfono adicional" value="" />
+            </mat-form-field>
+            <mat-form-field class="example-full-width" appearance="fill">
+              <mat-label>Correo electrónico</mat-label>
+              <input matInput placeholder="Correo electrónico" value="juancarlos@correocorreo.com" disabled='true' />
+            </mat-form-field>
+          </div>
+  
+          <div class="flex w-full gap-5 py-1">
+            <mat-form-field appearance="fill" class="w-full">
+              <mat-label>Nacionalidad</mat-label>
+              <mat-select value="">
+                <mat-option value="1">Argentino</mat-option>
+                <mat-option value="2">Peruano</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="w-full">
+              <mat-label>Estado civil</mat-label>
+              <mat-select value="">
+                <mat-option value="1">Soltero</mat-option>
+                <mat-option value="2">Casado</mat-option>
+                <mat-option value="3">Divorciado</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          
+          <div class="flex w-full gap-5 py-1">
+            <mat-form-field appearance="fill" class="w-full">
+              <mat-label>Actividad</mat-label>
+              <mat-select value="">
+                <mat-option value="1">Inpendependiente</mat-option>
+                <mat-option value="2">Pendiente</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <div class="w-full"></div>
+          </div>
+          <p class="font-bold text-xl mt-5">Dirección</p>
+          <div class="flex w-full gap-5 py-1">
+            <mat-form-field appearance="fill" class="w-full">
+              <mat-label>Región</mat-label>
+              <mat-select value="">
+                <mat-option value="1">Costa</mat-option>
+                <mat-option value="2">Sierra</mat-option>
+                <mat-option value="3">Selva</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="w-full">
+              <mat-label>Comuna</mat-label>
+              <mat-select value="">
+                <mat-option value="1">11</mat-option>
+                <mat-option value="2">12</mat-option>
+                <mat-option value="3">13</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+  
+          <div class="flex w-full gap-5 py-1">
+            <mat-form-field class="example-full-width" appearance="fill">
+              <mat-label>Calle</mat-label>
+              <input matInput placeholder="Calle" value="" />
+            </mat-form-field>
+            <mat-form-field class="example-full-width" appearance="fill">
+              <mat-label>Número</mat-label>
+              <input matInput placeholder="Número" value="" />
+            </mat-form-field>
+          </div>
+  
+          <div class="flex w-full gap-5 py-1">
+            <mat-form-field class="example-full-width" appearance="fill">
+              <mat-label>Departamento</mat-label>
+              <input matInput placeholder="Departamento" value="" />
+            </mat-form-field>
+            <mat-form-field class="example-full-width" appearance="fill">
+              <mat-label>Referencias adicionales</mat-label>
+              <input matInput placeholder="Referencias adicionales" value="" />
+            </mat-form-field>
+          </div>
+  
+          <div class="flex w-full gap-5 py-1">
+            <mat-form-field appearance="fill" class="w-full">
+              <mat-label>Producto</mat-label>
+              <mat-select value="">
+                <mat-option value="1">Lima</mat-option>
+                <mat-option value="2">Santa Anita</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <div class="w-full"></div>
+          </div>
+          <div class="my-5 w-full">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2354.012135278866!2d-70.66358365360561!3d-33.44732936156084!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9662c5a83e119691%3A0xb5a809b74f3595b4!2sVidaIntegra%20Alameda!5e0!3m2!1ses-419!2spe!4v1656280741795!5m2!1ses-419!2spe" width="800" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
+  
+          <p class="font-bold text-xl mt-10">Indique la fecha de vencimiento de pago de la tarjeta</p>
+          <mat-radio-group aria-label="Select an option" class="flex flex-col ">
+            <mat-radio-button value="1" class="py-3">Los primeros 5 días de cada mes</mat-radio-button>
+            <mat-radio-button value="2" class="py-3">Los primeros 10 días de cada mes</mat-radio-button>
+            <mat-radio-button value="3" class="py-3">Los primeros 15 días de cada mes</mat-radio-button>
+            <mat-radio-button value="4" class="py-3">Los primeros 20 días de cada mes</mat-radio-button>
+          </mat-radio-group>
+  
+          <p class="font-bold text-xl mt-5">Enviar estado de cuenta al correo</p>
+          <mat-radio-group aria-label="Select an option" class="flex flex-col">
+            <mat-radio-button value="1" class="py-3">Si</mat-radio-button>
+            <mat-radio-button value="2" class="py-3">No</mat-radio-button>
+          </mat-radio-group>
+      </form>
+        <div class="flex justify-center gap-10 items-center">
+            <button mat-stroked-button (click)="clickInformation()"  class="btn-primary-outline w-64 border-2 border-primary flex items-center justify-center gap-5">
+              Volver
+            </button>
+            <button mat-raised-button (click)="clickSignature(); scroll(evaluacion)" class="w-64 btn-primary px-0 flex items-center justify-center gap-5 ">
+              Siguiente
+            </button>
+        </div>
+      </mat-card>
+    </div>
+    
+    <!-- signature -->
+    <div *ngIf="step==='signature'" class="flex justify-center gap-16 my-10">
+      <mat-card class="flex flex-col  w-240 bg-white shadow-[0_5px_15px_2px_rgba(0,0,0,0.1)] rounded-2xl px-24 py-12 gap-8">
+ 
+        <div class="flex flex-col gap-5">
+          <p class="font-bold text-xl">Firma de contratos</p>
+          <div class="flex gap-3 items-center">
+            <mat-checkbox class="">Contrato de Apertura de Línea de Crédito</mat-checkbox>
+          <mat-icon class="w-4 h-5" svgIcon="icons:file-icon"></mat-icon>
+          </div>
+          <div class="flex gap-3 items-center">
+            <mat-checkbox class="">Declaración de vínculo con personas expuestas politicamente (PEP) Digitalizar e incorporar Firma Avanzada)</mat-checkbox>
+            <mat-icon class="w-4 h-5" svgIcon="icons:info-purple-icon"></mat-icon>
+            <mat-icon class="w-4 h-5" svgIcon="icons:file-icon"></mat-icon>
+          </div>
+          <mat-radio-group aria-label="Select an option" class="flex flex-col gap-5">
+            <mat-radio-button value="1" >El cliente si declara tener relación con personas politicamente expuestas.</mat-radio-button>
+            <mat-radio-button value="2" >El cliente declara no tener relación con personas politicamente expuestas.</mat-radio-button>
+          </mat-radio-group>
+      </div>
+        <div class="flex justify-center py-5">
+          <button mat-raised-button class="btn-primary w-80 flex items-center justify-center gap-5">
+            <mat-icon class="w-5 h-4 text-current"  svgIcon="icons:mail-icon"></mat-icon>
+            Firmar y enviar por email
+          </button>
+        </div>
+        <mat-card class="flex flex-col w-full items-center justify-center bg-white shadow-[0_5px_15px_2px_rgba(0,0,0,0.1)] rounded-lg px-4 py-12 gap-6">
+          <p class="text-center font-bold">Validación E-cert doble factor</p>
+          <div class="flex justify-center gap-10">
+            <div class="border-2 rounded-lg px-10 py-3 flex flex-col items-center gap-2">
+              <mat-icon class="w-20 h-20" svgIcon="icons:fingerprint-icon"></mat-icon>
+              <p class="font-bold">Huella digital</p>
+            </div>
+            <div class="border-2 rounded-lg px-10 py-3 flex flex-col items-center gap-2">
+              <mat-icon class="w-20 h-20" svgIcon="icons:license-icon"></mat-icon>
+              <p class="font-bold">Carnet de identidad</p>
+            </div>
+          </div>
+          <button mat-raised-button class="btn-primary mt-2 w-64">Verificar identidad</button>
+        </mat-card>
+        <div class="flex w-full justify-center gap-5 "> 
+          <button mat-raised-button class="btn-secondary flex items-center justify-center gap-5 px-5">
+            <mat-icon class="w-5 h-4 text-current"  svgIcon="icons:mail-icon"></mat-icon>
+            Imprimir documento
+          </button>
+          <button mat-stroked-button class="btn-secondary-outline border-2 border-secondary px-5">Autorizar con proceso excepción</button>
+        </div>
+      </mat-card>
+    </div>
+
+     <!-- print -->
+    <div *ngIf="step==='print'" class="flex justify-center gap-16 my-10">
+      <mat-card class="flex flex-col items-center  w-[60rem] bg-white shadow-[0_5px_15px_2px_rgba(0,0,0,0.1)] rounded-2xl px-24 py-12 gap-8">
+  
+       
+        <div class="border-2 box-border border-neutralt-500 rounded-[20px] w-[32rem] h-[52px] relative">
+          <button mat-raised-button (click)="clickChangecard1()" [ngClass]="{'bg-primary text-white':card,'bg-transparent  text-[#475694]':!card}" class="shadow-none transition-colors duration-300 ease-in-out h-[52px] font-bold rounded-[20px] absolute -top-0.5 -left-0.5 w-64">Imprimir tarjeta (1)</button>
+          <button mat-raised-button (click)="clickChangecard2()"  [ngClass]="{'bg-primary text-white':!card,'bg-transparent text-[#475694]':card}" class=" shadow-none transition-colors duration-300 ease-in-out h-[52px] font-bold rounded-[20px] absolute  -top-0.5 -right-0.5 w-64 ">Activar tarjeta (2)</button>
+        </div>
+        <img class="w-96 h-64" src="../../../../../assets/imgs/coronacard.png" alt="info"/>
+
+        <div  *ngIf="!card" class="flex w-full justify-center  gap-5 "> 
+          <button mat-raised-button class="btn-secondary  text-white px-5 w-[12.2rem]">Generar PIN Tarjeta</button>
+          <button mat-stroked-button class="btn-secondary-outline border-2 border-secondary w-[12.2rem]  px-5">Generar PIN Cliente</button>
+        </div>
+
+        <p class="font-bold text-xl">Firma los comprobantes de entrega y activación de PIN</p>
+        <div *ngIf="!card" >
+          <div class="flex gap-2">
+            <mat-icon class="w-4 h-5" svgIcon="icons:relog-icon"></mat-icon>
+            <p class="text-secondary font-medium">Comprobante de Entrega y Activación de Tarjeta Corona Mastercard (carta foliada) (Incorporar a Firma Avanzada)</p>
+            <mat-icon class="w-4 h-5" svgIcon="icons:file-icon"></mat-icon>
+          </div>
+          <div class="flex gap-2 mt-5">
+            <mat-icon class="w-4 h-5" svgIcon="icons:relog-icon"></mat-icon>
+            <p class="text-secondary font-medium">Entrega Clave PIN (6 dígitos) (Incorporar Firma Avanzada)</p>
+            <mat-icon class="w-4 h-5" svgIcon="icons:file-icon"></mat-icon>
+          </div>
+        </div>
+        
+
+          <button mat-raised-button class="btn-primary my-5 w-64 flex items-center justify-center gap-5">
+            <mat-icon class="w-5 h-4 text-current"  svgIcon="icons:credit-card-icon"></mat-icon>
+            Imprimir Tarjeta
+          </button>
+        <mat-card class="flex flex-col w-full items-center justify-center bg-white shadow-[0_5px_15px_2px_rgba(0,0,0,0.1)] rounded-lg px-4 py-12 gap-6">
+          <p class="text-center font-bold">Validación E-cert doble factor</p>
+          <div class="flex justify-center gap-10">
+            <div class="border-2 rounded-lg px-10 py-3 flex flex-col items-center gap-2">
+              <mat-icon class="w-20 h-20" svgIcon="icons:fingerprint-icon"></mat-icon>
+              <p class="font-bold">Huella digital</p>
+            </div>
+            <div class="border-2 rounded-lg px-10 py-3 flex flex-col items-center gap-2">
+              <mat-icon class="w-20 h-20" svgIcon="icons:license-icon"></mat-icon>
+              <p class="font-bold">Carnet de identidad</p>
+            </div>
+          </div>
+          <button mat-raised-button class="btn-primary mt-2 w-64">Verificar identidad</button>
+        </mat-card>
+
+        <div  *ngIf="!card" class="flex w-full justify-center gap-5 "> 
+          <button  mat-raised-button class="btn-secondary flex items-center justify-center gap-5 px-10">
+            <mat-icon class="w-5 h-4 text-current"  svgIcon="icons:mail-icon"></mat-icon>
+            Imprimir documento
+          </button>
+          <button mat-stroked-button class="btn-secondary-outline border-2 border-secondary px-10">Autorizar con proceso excepción</button>
+        </div>
+        <button mat-raised-button *ngIf="card" class="btn-primary px-10">Autorizar con proceso excepción</button>
+       
+      </mat-card>
+    </div>
+
+     <!-- insurance -->
+    <!-- <div *ngIf="step==='insurance'" class="flex justify-center gap-16 my-10">
+      <div class="flex flex-col  w-240 bg-white shadow-[0_5px_15px_2px_rgba(0,0,0,0.1)] rounded-2xl px-24 py-12 gap-8">
+
+        <p class="font-bold text-xl">Seguros de Desgravamen y/o cesantía para tu tarjetaCorona</p>
+        <div>
+          <div class="flex items-center mr-4 mt-5  border-[1.5px] border-neutralt-500 h-14 w-80 px-5 rounded-lg">
+            <input id="seguro" type="radio" value="" name="colored-radio" class="w-4 h-4  bg-gray-100 border-gray-300 ">
+            <label for="seguro" class="ml-2 text-lg">Seguro de desgravamen</label>
+          </div>
+          <div class="flex items-center mr-4 mt-5  border-[1.5px] border-neutralt-500 h-14 w-80 px-5 rounded-lg">
+            <input id="cesan" type="radio" value="" name="colored-radio" class="w-4 h-4  bg-gray-100 border-gray-300 ">
+            <label for="cesan" class="ml-2 text-lg">Seguro de cesantía</label>
+          </div>
+          <div class="flex items-center mr-4 mt-5  border-[1.5px] border-neutralt-500 h-14 w-80 px-5 rounded-lg">
+            <input id="des" type="radio" value="" name="colored-radio" class="w-4 h-4  bg-gray-100 border-gray-300 ">
+            <label for="des" class="ml-2 text-lg">Seguro desgravamen + cesantía</label>
+          </div>
+          <div class="flex items-center mr-4 mt-5  border-[1.5px] border-neutralt-500 h-14 w-80 px-5 rounded-lg">
+            <input id="na" type="radio" value="" name="colored-radio" class="w-4 h-4  bg-gray-100 border-gray-300 ">
+            <label for="na" class="ml-2 text-lg">Ninguno</label>
+          </div>
+      </div>
+  
+        <p class="font-bold text-xl">Firma de contratos</p>
+        <div class="flex gap-3 ">
+        <input type="checkbox" class="mt-1"/>
+        <p class="text-neutralt-700 font-medium">Certificado de Cobertura Seguro de Desgravamen + Cesantía</p>
+        </div>
+        <div class="flex gap-3 ">
+          <input type="checkbox" class="mt-1"/>
+          <p class="text-neutralt-700 font-medium">Anexo de Contrato de seguro</p>
+        </div>
+       
+        <div class="flex justify-center py-5">
+          <button class="btn-md w-80 px-0 bg-primary text-white flex items-center justify-center gap-5">
+            <mat-icon class="w-5 h-4 text-current"  svgIcon="icons:mail-icon"></mat-icon>
+            Firmar y enviar por email
+          </button>
+        </div>
+        <div class="flex flex-col w-full items-center justify-center bg-white shadow-[0_5px_15px_2px_rgba(0,0,0,0.1)] rounded-lg px-4 py-12 gap-6">
+          <p class="text-center font-bold">Validación E-cert doble factor</p>
+          <div class="flex justify-center gap-10">
+            <div class="border-2 rounded-lg px-10 py-3 flex flex-col items-center gap-2">
+              <mat-icon class="w-20 h-20" svgIcon="icons:fingerprint-icon"></mat-icon>
+              <p class="font-bold">Huella digital</p>
+            </div>
+            <div class="border-2 rounded-lg px-10 py-3 flex flex-col items-center gap-2">
+              <mat-icon class="w-20 h-20" svgIcon="icons:license-icon"></mat-icon>
+              <p class="font-bold">Carnet de identidad</p>
+            </div>
+          </div>
+          <button class="btn-md btn-primary mt-2 w-64">Verificar identidad</button>
+        </div>
+        <div class="flex w-full justify-center gap-5 "> 
+          <button class="btn-md bg-secondary text-white flex items-center justify-center gap-5 px-5">
+            <mat-icon class="w-5 h-4 text-current"  svgIcon="icons:mail-icon"></mat-icon>
+            Imprimir documento
+          </button>
+          <button class="btn-md border-secondary text-secondary px-5">Autorizar con proceso excepción</button>
+        </div>
+      </div>
+    </div> -->
+
+
+    <div *ngIf="step==='insurance'" class="flex w-full  justify-end gap-5">
+      <button mat-raised-button (click)="clickAssessment()" class="btn-primary w-64 ">Terminar</button>
+    </div>
+
+    <div *ngIf="step==='print'" class="flex w-full  justify-end gap-5">
+      <button mat-raised-button (click)="clickInsurance(); scroll(evaluacion)" class="btn-primary w-64">Siguiente</button>
+    </div>
+
+    <div *ngIf="step==='signature'" class="flex w-full  justify-end gap-5">
+      <button mat-stroked-button (click)="clickData()" class="btn-primary-outline border-2 border-primary w-64">Volver</button> 
+      <button mat-raised-button (click)="clickPrint(); scroll(evaluacion)" class="btn-primary w-64 ">Siguiente</button>
+    </div>
+
+    <div *ngIf="step==='assessment'" class="flex w-full  justify-between"> 
+      <button mat-stroked-button class="btn-secondary-outline border-2 border-secondary w-72">Autorizar por excepción</button> 
+      <button mat-raised-button (click)="clickScoring()" class="btn-primary w-72 ">Siguiente</button>
+    </div>
+    <div *ngIf="step==='scoring-card'" class="flex justify-end">
+      <button  (click)="clickAssessment()" class="btn-primary w-72">Terminar y salir</button> 
+    </div>
+  </main>
+  </div>
+
+
+  
+ 
+  
+  
+
+  
+  

@@ -1,0 +1,30 @@
+<div class="relative h-screen z-20 w-64">
+  <div class="flex flex-col w-64 h-full  bg-white  shadow-xl px-4 overflow-y-scroll no-scrollbar pb-20">
+      <mat-icon class="w-[154px] h-[34px] min-w-[154px] min-h-[34px] mb-4 mt-8" svgIcon="icons:logo"></mat-icon>
+      <div class="mt-10 mb-5 flex gap-3">
+          <img class="w-10 h-10 rounded-full mt-2" src="../../../assets/imgs/avatar.svg"/>
+          <div>
+              <p class="text-primary text-xl font-bold">Luis Rodriguez</p>
+              <p class="text-secondary">Sucursal: Pdte. Kenndy</p>
+              <p class="mt-5">30 de mayo del 2022</p>
+          </div>
+      </div>
+      <button routerLink="admission" (click)="clickShowAdmission()" [ngClass]="{' text-stone-400': !isPress, 'bg-primary text-white': isPress}" class="font-poppins nav-li py-3 text-lg  px-3 w-full rounded-tr-md rounded-tl-md text-left hover:bg-primary hover:text-white transition-colors duration-300 ease-in-out" [routerLinkActive]="'bg-primary text-[#fff]'">Admisión</button>
+      <button *ngIf="showAdmission"  routerLink="admission/assessment" class="font-poppins py-3 text-lg text-primary px-5 w-full bg-primary bg-opacity-10 rounded-br-md rounded-bl-md text-left hover:bg-primary hover:text-white transition-colors duration-300 ease-in-out">Evaluación</button>
+      <button routerLink="change-product" (click)="clickShowChangeProduct()" class="font-poppins py-3 text-lg text-stone-400 px-3 w-full rounded-tr-md rounded-tl-md text-left hover:bg-primary hover:text-white transition-colors duration-300 ease-in-out" [routerLinkActive]="'bg-primary text-[#fff]'">Cambio de producto</button>
+      <button routerLink="additional" (click)="clickShowAdditional()" class="font-poppins py-3 text-lg text-stone-400 px-3 w-full rounded-tr-md rounded-tl-md text-left hover:bg-primary hover:text-white transition-colors duration-300 ease-in-out" [routerLinkActive]="'bg-primary text-[#fff]'">Adicionales</button>
+      <button routerLink="reprint-cards" (click)="clickShowReprintCards()" class="font-poppins py-3 text-lg text-stone-400 px-3 w-full rounded-tr-md rounded-tl-md text-left hover:bg-primary hover:text-white transition-colors duration-300 ease-in-out" [routerLinkActive]="'bg-primary text-[#fff]'">Reimprimir tarjetas</button>
+      <button routerLink="change-pin" (click)="clickShowChangePin()" class="font-poppins py-3 text-lg text-stone-400 px-3 w-full rounded-tr-md rounded-tl-md text-left hover:bg-primary hover:text-white transition-colors duration-300 ease-in-out" [routerLinkActive]="'bg-primary text-[#fff]'">Cambio de PIN</button>
+      <button routerLink="print-card" (click)="clickShowPrintCard()" class="font-poppins py-3 text-lg text-stone-400 px-3 w-full rounded-tr-md rounded-tl-md text-left hover:bg-primary hover:text-white transition-colors duration-300 ease-in-out" [routerLinkActive]="'bg-primary text-[#fff]'">Imprimir tarjeta digital</button>
+      <button routerLink="management" (click)="clickShowManagement()" class="font-poppins py-3 text-lg text-stone-400 px-3 w-full rounded-tr-md rounded-tl-md text-left hover:bg-primary hover:text-white transition-colors duration-300 ease-in-out" [routerLinkActive]="'bg-primary text-[#fff]'">Gestión de solicitudes y clientes</button>
+      <button routerLink="dashboard" (click)="clickShowDashboard()"  class="font-poppins py-3 text-lg text-stone-400 px-3 w-full rounded-tr-md rounded-tl-md text-left hover:bg-primary hover:text-white transition-colors duration-300 ease-in-out" [routerLinkActive]="'bg-primary text-[#fff]'">Dashboard y reportes</button>
+      <button routerLink="maintainers" (click)="clickShowMaintainers()" class="font-poppins py-3 text-lg text-stone-400 px-3 w-full rounded-tr-md rounded-tl-md text-left hover:bg-primary hover:text-white transition-colors duration-300 ease-in-out" [routerLinkActive]="'bg-primary text-[#fff]'">Mantenedores</button>
+
+  </div>
+  <div class="w-full absolute bottom-0 pb-5 left-0 px-4 z-10 bg-white">
+      <button (click)="logout()" class="flex items-center gap-3 left-0 font-black py-3 font-poppins px-3  text-lg text-stone-400  w-full rounded-md text-left hover:bg-red-500 hover:text-white transition-colors duration-300 ease-in-out">
+          <mat-icon class="min-w-[20px] mb-1 text-current" svgIcon="icons:logout-icon"></mat-icon>
+          Cerrar sesión
+      </button>
+  </div>
+</div>

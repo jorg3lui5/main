@@ -1,0 +1,40 @@
+/* You can add global styles to this file, and also import other style files */
+@tailwind base
+@tailwind utilities
+@tailwind components
+
+
+html,body 
+    font-family: 'Open Sans' !important
+
+
+.example-full-width
+    width:100%
+
+.no-scrollbar::-webkit-scrollbar 
+    display: none
+
+
+.btn-primary
+        @apply bg-primary font-bold h-11 border-primary text-white  rounded-lg text-base
+        border-radius: 8px !important
+        font-family: 'Open Sans' !important
+
+.btn-primary-outline
+        @apply  h-11 font-bold rounded-lg  text-base border-primary text-primary
+        border-radius: 8px !important
+        font-family: 'Open Sans' !important
+        
+
+.btn-secondary
+        @apply bg-secondary  font-bold h-11  text-white text-base 
+        border-radius: 8px !important
+        font-family: 'Open Sans' !important
+       
+
+.btn-secondary-outline
+        @apply  h-11 font-bold rounded-lg text-base  text-secondary 
+        border-radius: 8px !important
+        font-family: 'Open Sans' !important
+       
+        
